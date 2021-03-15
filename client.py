@@ -17,7 +17,7 @@ while True:
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Connect the socket to the port where the server is listening
-    server_address = ('192.168.8.102', 10000)
+    server_address = ("35.246.27.70", 5001)
     print(f'connecting to {server_address[0]} port {server_address[1]}')
     sock.connect(server_address)
 
