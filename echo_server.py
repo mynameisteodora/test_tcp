@@ -5,7 +5,7 @@ import sys
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('35.246.27.70', 10000)
+server_address = ('0.0.0.0', 5001)
 print(f'starting up on {server_address[0]} port {server_address[1]}')
 sock.bind(server_address)
 
@@ -25,8 +25,8 @@ while True:
             data = connection.recv(16)
             print('received "%s"' % data)
             if data:
-                print('sending data back to the client')
-                connection.sendall(data)
+                reply = input('Send something back:')
+                connection.sendall(reply.encode('utf-8'))
             else:
                 print('no more data from', client_address)
                 break
