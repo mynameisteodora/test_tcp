@@ -22,6 +22,7 @@ while True:
 
         # Receive the data in small chunks and retransmit it
         while True:
+            print('Waiting for message...')
             data = connection.recv(1000)
             print('received "%s"' % data)
             if data:
