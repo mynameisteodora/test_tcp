@@ -3,6 +3,7 @@ import sys
 import os
 import pty
 import serial
+import logging
 
 # set up the virtual serial port
 master, slave = pty.openpty()
@@ -33,18 +34,19 @@ while True and user_message != "Bye":
         print(f'sending "{message}"')
         sock.sendall(message)
 
-        # Look for the response
-        amount_received = 0
-        amount_expected = len(message)
-
         data = sock.recv(1000)
         print(f'received "{data}"')
 
-        if data.decode('utf-8') == 'Bye':
+        if data.decode('utf-8').strip() == 'Bye':
+            print("Received bye from server, closing connection")
             sock.close()
+            break
 
-    except:
+    except Exception as e:
         print('closing socket because of error')
+        logging.error("Error: ", exc_info=e)
         sock.close()
+        break
 
 print("Conversation ended.")
+
