@@ -87,6 +87,9 @@ while True:
         print('connection = ', connection)
         print('type = ', type(connection))
 
+        data = connection.recv(1000)
+        print('received ', data)
+
         # this is starting the nrfutil code
         logger = logging.getLogger(__name__)
         log_level = TRANSPORT_LOGGING_LEVEL
