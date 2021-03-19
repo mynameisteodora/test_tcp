@@ -90,6 +90,9 @@ while True:
         data = connection.recv(1000)
         print('received ', data)
 
+        # respond to the address
+        connection.send('received'.encode())
+
         # this is starting the nrfutil code
         logger = logging.getLogger(__name__)
         log_level = TRANSPORT_LOGGING_LEVEL
