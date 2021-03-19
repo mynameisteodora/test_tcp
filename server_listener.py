@@ -91,6 +91,7 @@ while True:
         print('received ', data)
 
         # respond to the address
+        print("Sending received...")
         connection.send('received'.encode())
 
         # this is starting the nrfutil code
