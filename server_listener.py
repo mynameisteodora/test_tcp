@@ -83,34 +83,37 @@ while True:
     print('waiting for a connection')
     connection, client_address = sock.accept()
     connections_received += 1
+    connection_established = True
 
-    try:
-        print('connection from', client_address)
-        print('connection = ', connection)
-        print('type = ', type(connection))
+    while connection_established:
+        try:
+            print('connection from', client_address)
+            print('connection = ', connection)
+            print('type = ', type(connection))
 
-        print("Try ", connections_received)
-        data = connection.recv(117)
-        print('received 117 bytes:', data)
+            print("Try ", connections_received)
+            data = connection.recv(117)
+            print('received 117 bytes:', data)
 
-        # respond to the address
-        print("Sending received message...")
-        connection.send('received'.encode())
+            # respond to the address
+            print("Sending received message...")
+            connection.send('received'.encode())
 
-        # this is starting the nrfutil code
-        # logger = logging.getLogger(__name__)
-        # log_level = TRANSPORT_LOGGING_LEVEL
-        # logging.basicConfig(format='%(asctime)s %(message)s', level=log_level)
-        # print("calling tcp")
-        # do_tcp(package="app_dfu_package.zip", port='/dev/tts001', tcp_conn=connection)
-        # import pc_nrfutil.nordicsemi.__main__
+            # this is starting the nrfutil code
+            # logger = logging.getLogger(__name__)
+            # log_level = TRANSPORT_LOGGING_LEVEL
+            # logging.basicConfig(format='%(asctime)s %(message)s', level=log_level)
+            # print("calling tcp")
+            # do_tcp(package="app_dfu_package.zip", port='/dev/tts001', tcp_conn=connection)
+            # import pc_nrfutil.nordicsemi.__main__
 
-        # # Once the connection is made to the client, try to invoke code
-        # # from the other script
-        # while True:
-        #     print('Sending message from server_doer')
-        #     subprocess.run((f"python server_doer.py --ta {client_address[0]} --tp {client_address[1]}").split())
+        except Exception as e:
+            print('closing socket because of error')
+            logging.error("Error: ", exc_info=e)
+            connection_established = False
+            connection.close()
 
-    finally:
-        # Clean up the connection
-        connection.close()
+        finally:
+            connection_established = False
+            # Clean up the connection
+            connection.close()
