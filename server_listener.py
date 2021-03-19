@@ -76,25 +76,26 @@ sock.bind(server_address)
 # Listen for incoming connections
 sock.listen(1)
 
+connections_received = 0
+
 while True:
     # Wait for a connection
     print('waiting for a connection')
     connection, client_address = sock.accept()
-
+    connections_received += 1
 
     try:
         print('connection from', client_address)
         print('connection = ', connection)
         print('type = ', type(connection))
 
-        for i in range(10):
-            print("Try ", (i + 1))
-            data = connection.recv(117)
-            print('received 117 bytes:', data)
+        print("Try ", connections_received)
+        data = connection.recv(117)
+        print('received 117 bytes:', data)
 
-            # respond to the address
-            print("Sending received...")
-            connection.send('received'.encode())
+        # respond to the address
+        print("Sending received message...")
+        connection.send('received'.encode())
 
         # this is starting the nrfutil code
         # logger = logging.getLogger(__name__)
