@@ -91,20 +91,20 @@ while True:
             print('connection = ', connection)
             print('type = ', type(connection))
 
-            print("Try ", connections_received)
+            print("Connection number", connections_received)
             data = connection.recv(117)
-            print('received 117 bytes:', data)
+            print('received UUID in bytes:', data)
 
-            # respond to the address
-            print("Sending received message...")
-            connection.send('received'.encode())
+            # # respond to the address
+            # print("Sending received message...")
+            # connection.send('received'.encode())
 
             # this is starting the nrfutil code
-            # logger = logging.getLogger(__name__)
-            # log_level = TRANSPORT_LOGGING_LEVEL
-            # logging.basicConfig(format='%(asctime)s %(message)s', level=log_level)
-            # print("calling tcp")
-            # do_tcp(package="app_dfu_package.zip", port='/dev/tts001', tcp_conn=connection)
+            logger = logging.getLogger(__name__)
+            log_level = TRANSPORT_LOGGING_LEVEL
+            logging.basicConfig(format='%(asctime)s %(message)s', level=log_level)
+            print("calling tcp")
+            do_tcp(package="app_dfu_package.zip", port='/dev/tts001', tcp_conn=connection)
             # import pc_nrfutil.nordicsemi.__main__
 
         except Exception as e:
