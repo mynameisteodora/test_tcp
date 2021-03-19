@@ -112,8 +112,3 @@ while True:
             logging.error("Error: ", exc_info=e)
             connection_established = False
             connection.close()
-
-        finally:
-            connection_established = False
-            # Clean up the connection
-            connection.close()
