@@ -88,9 +88,9 @@ while True:
         print('type = ', type(connection))
 
         for i in range(10):
-            print("Try ", i)
-            data = connection.recv(1000)
-            print('received ', data)
+            print("Try ", (i + 1))
+            data = connection.recv(117)
+            print('received 117 bytes:', data)
 
             # respond to the address
             print("Sending received...")
