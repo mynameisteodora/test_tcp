@@ -87,19 +87,20 @@ while True:
         print('connection = ', connection)
         print('type = ', type(connection))
 
-        data = connection.recv(1000)
-        print('received ', data)
+        for i in range(10):
+            data = connection.recv(1000)
+            print('received ', data)
 
-        # respond to the address
-        print("Sending received...")
-        connection.send('received'.encode())
+            # respond to the address
+            print("Sending received...")
+            connection.send('received'.encode())
 
         # this is starting the nrfutil code
-        logger = logging.getLogger(__name__)
-        log_level = TRANSPORT_LOGGING_LEVEL
-        logging.basicConfig(format='%(asctime)s %(message)s', level=log_level)
-        print("calling tcp")
-        do_tcp(package="app_dfu_package.zip", port='/dev/tts001', tcp_conn=connection)
+        # logger = logging.getLogger(__name__)
+        # log_level = TRANSPORT_LOGGING_LEVEL
+        # logging.basicConfig(format='%(asctime)s %(message)s', level=log_level)
+        # print("calling tcp")
+        # do_tcp(package="app_dfu_package.zip", port='/dev/tts001', tcp_conn=connection)
         # import pc_nrfutil.nordicsemi.__main__
 
         # # Once the connection is made to the client, try to invoke code
