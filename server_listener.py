@@ -88,6 +88,7 @@ while True:
         print('type = ', type(connection))
 
         for i in range(10):
+            print("Try ", i)
             data = connection.recv(1000)
             print('received ', data)
 
